@@ -2,7 +2,7 @@
 /** MAKE SURE THE TAB NAMES BELOW MATCH YOUR SPREADSHEET
 /** ------------------------------------------------------------------------------*/
 
-const foldersToCopy = 'Sheet1';  // tab name containing list folders to duplicate
+const foldersToCopy = 'Sheet1';  // tab name containing list of folders to duplicate
 
 /** ------------------------------------------------------------------------------
 /** BEWARE: EDITING BELOW THIS LINE MAY BREAK THE SCRIPT
