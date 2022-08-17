@@ -19,8 +19,8 @@ The header of your spreadsheet should begin with the following (starting with ce
 
 Please leave the date created column (column `A`) empty, as the script will use it to determine which folders need to be copied. Once a folder has been copied a timestemp will appear confirming the date and time it was copied.
 
-The contents of the following two columns should be as follows:
-`parent_folder`: id of the folder containing the folder you would like to copy
+The contents of the following two columns should be as follows:\
+`parent_folder`: id of the folder containing the folder you would like to copy\
 `new_folder_name`: name of the duplicate folder
 
 Once your ready to run the script, select the `Duplicate Folders` option under the `Duplicator` menu at the top of the spreadsheet.
