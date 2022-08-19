@@ -10,23 +10,31 @@ const foldersToCopy = 'Sheet1';  // tab name containing list of folders to dupli
 
 
 class TemplateDir {
-  find(rootDirId) {
+  getTemplate(templateDirId) {
     try {
-      this.rootDirId = rootDirId;
-      const rootDir = DriveApp.getFolderById(rootDirId);
-      const folders = rootDir.getFolders();
-      
-      while (folders.hasNext()) {
-        const nextFolder = folders.next();
-        if (nextFolder.getName().includes('TEMPLATE')) {
-          this.folder = nextFolder;
-          return nextFolder;
+      this.folder = DriveApp.getFolderById(templateDirId);
+      this.parentDir = this.getParentFolder(this.folder);
+    } catch(err) {
+      const msg = {
+          type: '😞 Something went wrong',
+          msg: `There was a problem finding the folder to copy. ${err}`
+        };
+        new Notification().send(msg);
+    }
+  };
+
+  getParentFolder(folder) {
+    try {  
+      const parents = folder.getParents();
+      while (parents.hasNext()) {
+        if (!this.parent) {
+          return parents.next();
         };
       };
     } catch(err) {
-        const msg = {
+      const msg = {
           type: '😞 Something went wrong',
-          msg: `There was a problem finding a template to copy. ${err}`
+          msg: `There was a problem finding the parent folder. ${err}`
         };
         new Notification().send(msg);
     };
@@ -35,9 +43,9 @@ class TemplateDir {
 
 
 class DestinationDir {
-  create(rootDirId, newDirName) {
-    this.rootDir = DriveApp.getFolderById(rootDirId);
-    this.folder = this.rootDir.createFolder(newDirName);
+  create(parentDir, newDirName) {
+    this.parentDir = DriveApp.getFolderById(parentDir.getId());
+    this.folder = this.parentDir.createFolder(newDirName);
     return this.folder;
   };
 };
@@ -56,12 +64,12 @@ class CopyManager {
       this.templateDir = templateDir;
       this.destinationDir = destinationDir;
       while (this.foldersInspected < this.numFolders) {
-        const rootFolder = this.foldersInspected === 0 ? true : false;
-        const source = rootFolder ? this.templateDir : this.queue[0].source;
-        const destination = rootFolder ? this.destinationDir : this.queue[0].destination;
+        const parentFolder = this.foldersInspected === 0 ? true : false;
+        const source = parentFolder ? this.templateDir : this.queue[0].source;
+        const destination = parentFolder ? this.destinationDir : this.queue[0].destination;
         this.copyFolders(source, destination);
         this.copyFiles(source, destination);
-        if (!rootFolder) this.queue.shift();
+        if (!parentFolder) this.queue.shift();
         this.foldersInspected += 1;
       };
       if (this.numFolders === this.foldersInspected) {
@@ -140,11 +148,13 @@ class App {
   run() {
     try {
       this.foldersToDupe.forEach(folder => {
-        const [_, rootDirId, newDirName] = folder;
-        const templateDir = new TemplateDir().find(rootDirId);
-        const destinationDir = new DestinationDir().create(rootDirId, newDirName);
+        const [_, templateDirId, newDirName] = folder;
+        const templateDir = new TemplateDir();
+        const destinationDir = new DestinationDir()
         const copy = new CopyManager()
-        copy.create(templateDir, destinationDir);
+        templateDir.getTemplate(templateDirId);
+        destinationDir.create(templateDir.parentDir, newDirName);
+        copy.create(templateDir.folder, destinationDir.folder);
         if (copy.processComplete) {
           this.sheet.markComplete(folder);
           this.completedCopies += 1;
