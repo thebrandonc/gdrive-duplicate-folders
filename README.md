@@ -7,7 +7,7 @@ Check out the YouTube tutorial here: [Check out the Tutorial](https://youtu.be/G
 
 ## Getting Started
 
-To get started with the duplication script, copy the contents of `duplicateFolders.js`, create a new spreadsheet in Google Sheets, and open the Apps Script editor `Extensions > Apps Script`. Once the editor is open, delete the `myFunction()` function and paste the script copied from `duplicateFolder.js`. Next, run the `main()` and Google will prompt you with a request to authorize some permissions so the script can access your spreadsheet and google drive account. 
+To get started with the duplication script, copy the contents of `duplicateFolders.js`, create a new spreadsheet in Google Sheets, and open the Apps Script editor `Extensions > Apps Script`. Once the editor is open, delete the `myFunction()` function and paste the script copied from `duplicateFolder.js`. Next, run the `main()` function and Google will prompt you with a request to authorize some permissions so the script can access your spreadsheet and google drive account. 
 
 Once authorization is granted, you are ready to set up the spreadsheet to start duplicating Google Drive folders. Please follow the format of the template spreadsheet provided here: [Spreadsheet Template](https://docs.google.com/spreadsheets/d/1psxqXe_9PG5ITPYeU5Sk8Fm0PhjihfsphqN-TAkeEio/edit#gid=0)
 
@@ -15,9 +15,9 @@ The header of your spreadsheet should begin with the following (starting with ce
 
 | date_created   | parent_folder | new_folder_name  |
 |:---------------|:--------------|:-----------------|
-|                |               |                  |
+| [leave blank]  | id_#          | new-folder       |
 
-Please leave the date created column (column `A`) empty, as the script will use it to determine which folders need to be copied. Once a folder has been copied a timestemp will appear confirming the date and time it was copied.
+Please leave the date created column (column `A`) empty, as the script will use it to determine which folders need to be copied. Once a folder has been copied, a timestemp will appear confirming the date and time it was copied.
 
 The contents of the following two columns should be as follows:\
 `parent_folder`: id of the folder containing the folder you would like to copy\
