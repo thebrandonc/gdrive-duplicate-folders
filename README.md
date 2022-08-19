@@ -7,21 +7,23 @@ Check out the YouTube tutorial here: [Check out the Tutorial](https://youtu.be/G
 
 ## Getting Started
 
-To get started with the duplication script, copy the contents of `duplicateFolders.js`, create a new spreadsheet in Google Sheets, and open the Apps Script editor `Extensions > Apps Script`. Once the editor is open, delete the `myFunction()` function and paste the script copied from `duplicateFolder.js`. Next, run the `main()` function and Google will prompt you with a request to authorize some permissions so the script can access your spreadsheet and google drive account. 
+The easiest way to get started is by copying the following spreadsheet template to your Google Drive: [Spreadsheet Template](https://docs.google.com/spreadsheets/d/1psxqXe_9PG5ITPYeU5Sk8Fm0PhjihfsphqN-TAkeEio/edit?usp=sharing). Once copied, run the script by clicking the 'Duplicator' option in the menu bar and selecting 'Duplicate Folders'. Google will then ask that you authorize some permissions, and once they're authorized you're ready to start duplicating folders.
 
-Once authorization is granted, you are ready to set up the spreadsheet to start duplicating Google Drive folders. Please follow the format of the template spreadsheet provided here: [Spreadsheet Template](https://docs.google.com/spreadsheets/d/1psxqXe_9PG5ITPYeU5Sk8Fm0PhjihfsphqN-TAkeEio/edit#gid=0)
+Alternatively, you can get started by manually inserting the script into your Apps Script editor. Start by copying the contents of `duplicateFolders.js`, then create a new spreadsheet in Google Sheets, and open the Apps Script editor `Extensions > Apps Script`. Once the editor is open, delete the `myFunction()` function and paste the script copied from `duplicateFolder.js`. Next, run the `main()` function and Google will prompt you with a request to authorize some permissions so the script can access your spreadsheet and google drive account. 
+
+Once authorization is granted, you are ready to set up the spreadsheet to start duplicating Google Drive folders. Please follow the format of the template spreadsheet provided here: [Spreadsheet Template](https://docs.google.com/spreadsheets/d/1psxqXe_9PG5ITPYeU5Sk8Fm0PhjihfsphqN-TAkeEio/edit?usp=sharing)
 
 The header of your spreadsheet should begin with the following (starting with cell `A1`): 
 
-| date_created   | parent_folder | new_folder_name  |
-|:---------------|:--------------|:-----------------|
-| [leave blank]  | id_#          | new-folder       |
+| date_created   | parent_folder_link             | new_folder_name  |
+|:---------------|:-------------------------------|:-----------------|
+| [leave blank]  | https://link_to_parent_folder  | new-folder-name  |
 
 Please leave the date created column (column `A`) empty, as the script will use it to determine which folders need to be copied. Once a folder has been copied, a timestemp will appear confirming the date and time it was copied.
 
 The contents of the following two columns should be as follows:\
-`parent_folder`: id of the folder containing the folder you would like to copy\
-`new_folder_name`: name of the duplicate folder
+`parent_folder_link`: link to the folder you would like to copy\
+`new_folder_name`: new name for the duplicated folder
 
 Once your ready to run the script, select the `Duplicate Folders` option under the `Duplicator` menu at the top of the spreadsheet.
 
