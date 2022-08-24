@@ -3,7 +3,7 @@
 
 This repo contains a script for duplicating Google Drive folders in bulk. The script adds a new menu item to your Google Sheet with an option to run the duplication process. The script will parse the contents of your spreadsheet and duplicate any folders that don't contain a timestamp in column `A`. All folders will be duplicated into the same parent folder as the source folder.
 
-Check out the YouTube tutorial here: [Check out the Tutorial](https://youtu.be/GWnCoA3seVI)
+Check out the YouTube tutorial here: [Check out the Tutorial](https://youtu.be/9n0SCQFaZyw)
 
 ## Getting Started
 
